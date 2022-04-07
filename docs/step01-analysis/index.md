@@ -2,7 +2,7 @@
 
 ## Overview
 
-This section reviews the [API Code Assignment](docs/api-code-assignment.md) [PDF](docs/API-Code-Assignment.pdf) and collects decisions and assumptions made for the project.
+This section reviews the [API Code Assignment](/docs/api-code-assignment.md)   and collects decisions and assumptions made for the project. [Original PDF here](/docs/API-Code-Assignment.pdf)
 
 ## Assumptions
 
@@ -12,7 +12,7 @@ This section reviews the [API Code Assignment](docs/api-code-assignment.md) [PDF
 4. The persisted **Applications** will later be consumed by a downstream processing system.
 5. Because all **Applications** are persisted, the API will only return HTTP level status codes 
 4. Each **Application** contains the submitted JSON data and a **ValidationStatus** field which contains *Accepted* or *Rejected* 
-5. Downstream processing systems can use the **ValidationStatus** field to determine whether to display an *Application* to the *Employer*
+5. Downstream processing systems will use the **ValidationStatus** field to determine whether to display an **Application** to the **Employer**
 
 ## Decisions
 
@@ -24,7 +24,7 @@ This section reviews the [API Code Assignment](docs/api-code-assignment.md) [PDF
 
 ## Ubiquitous Language
 
-- *Application* - the submitted JSON data, along with its *ValidationStatus* status
-- *Employer* - the business enttity that considerd *Applications* 
-- *ValidationStatus* - review of the submitted JSON data to determine if it meets the minimum qualifications. 
+- **Application** - the submitted JSON data, along with its **ValidationStatus** 
+- **Employer** - the business enttity that considerd **Applications** 
+- **ValidationStatus** - review of the submitted JSON data to determine if it meets the minimum qualifications. 
 
