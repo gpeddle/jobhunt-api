@@ -25,6 +25,6 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md)   a
 ## Ubiquitous Language
 
 - **Application** - the submitted JSON data, along with its **ValidationStatus** 
-- **Employer** - the business enttity that considerd **Applications** 
+- **Employer** - the business entity that considers **Applications** 
 - **ValidationStatus** - review of the submitted JSON data to determine if it meets the minimum qualifications. 
 
