@@ -14,6 +14,16 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md)  an
    - *A real system would require a full life-cycle for Questions. This example is limited to a single, static question set for use in validation.*
 
 
+
+## Ubiquitous Language
+
+- **JobApplication** - the submitted JSON data with answers to **Questions**
+- **Question** - a request for information which has a pre-defined set of acceptable answers.
+- **Applicant** - the person applying for a job.
+- **Employer** - the business entity which considers **JobApplications** 
+- **Validation** - a review of **JobApplication** data to determine if the answers provided are all within the acceptable values for the **Questions** posed. 
+
+
 ## Domain Description
 
 1. A **JobApplication** is a JSON document as described in the assignment.
@@ -24,19 +34,14 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md)  an
 7. A **JobApplication** which fails validation is *Rejected*, with a JSON response.
 8. Each *Rejected* **JobApplication** is discarded.
 
+## Bounded Context
+
+The API will handle only the receipt of **JobApplication** JSON data and immediately respond with accept/reject status.
+The **Questions** are a separate authority that is available as a service. 
+
 ## Technical Decisions
 
 - Implement an API only service using .NET 6.0 webapi template
 - Use Swagger to test the behavior of the API
 - During testing, store submitted data in memory
-- Restarting the API service loses all submitted data
-
-
-## Ubiquitous Language
-
-- **JobApplication** - the submitted JSON data with answers to **Questions**
-- **Question** - a request for information which has a pre-defined set of acceptable answers.
-- **Applicant** - the person applying for a job.
-- **Employer** - the business entity which considers **JobApplications** 
-- **Validation** - a review of **JobApplication** data to determine if the answers provided are all within the acceptable values for the **Questions** posed. 
-
+- Stopping the API service loses all submitted data
