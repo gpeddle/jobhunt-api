@@ -2,29 +2,39 @@
 
 ## Overview
 
-This section reviews the [API Code Assignment](/docs/api-code-assignment.md)   and collects decisions and assumptions made for the project. [Original PDF here](/docs/API-Code-Assignment.pdf)
+This section reviews the [API Code Assignment](/docs/api-code-assignment.md)  and collects decisions and assumptions made for the project. [Original PDF here](/docs/API-Code-Assignment.pdf)
 
 ## Assumptions
 
 1. There is no UI, and the API is tested manually. 
-2. A series of test questions and answers must be created.
-3. All submitted **Applications** are persisted.
-4. The persisted **Applications** will later be consumed by a downstream processing system.
-5. Because all **Applications** are persisted, the API will only return HTTP level status codes 
-4. Each **Application** contains the submitted JSON data and a **ValidationStatus** field which contains *Accepted* or *Rejected* 
-5. Downstream processing systems will use the **ValidationStatus** field to determine whether to display an **Application** to the **Employer**
+   - *For our purpose, the request/response of the API is the only UI.* 
+2. There is no separate database.
+   - *A real system would persist data and do additional processing. This example is limited to  receiving and validating incoming records for accept/reject status.*
+3. A series of test questions and answers must be created.
+   - *A real system would require a full life-cycle for Questions. This example is limited to a single, static question set for use in validation.*
 
-## Decisions
 
-- Implement an API only service using .NET6 webapi template
+## Domain Description
+
+1. A **JobApplication** is a JSON document as described in the assignment.
+3. Upon submission, each **JobApplication** is validated against the questions.
+4. A **JobApplication** which passes validation is *Accepted*, with a JSON response.
+5. Each *Accepted* **JobApplication** is persisted for additional processing.
+6. All *Accepted* **JobApplications** will later be consumed by a downstream processing system.
+7. A **JobApplication** which fails validation is *Rejected*, with a JSON response.
+8. Each *Rejected* **JobApplication** is discarded.
+
+## Technical Decisions
+
+- Implement an API only service using .NET 6.0 webapi template
 - Use Swagger to test the behavior of the API
-- During local testing, store submitted data in a local output folder
-- Once deployed, store submitted data in Amazon AWS S3 bucket
-- Provide access to the S3 bucket for inspection by reviewers
+- During testing, store submitted data in memory
+- Restarting the API service loses all submitted data
+
 
 ## Ubiquitous Language
 
-- **Application** - the submitted JSON data, along with its **ValidationStatus** 
-- **Employer** - the business entity that considers **Applications** 
-- **ValidationStatus** - review of the submitted JSON data to determine if it meets the minimum qualifications. 
+- **JobApplication** - the submitted JSON data
+- **Employer** - the business entity which considers **JobApplications** 
+- **Validation** - a review of the submitted JSON data to determine if it meets the minimum qualifications. 
 
