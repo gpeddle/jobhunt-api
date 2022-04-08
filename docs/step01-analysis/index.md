@@ -38,5 +38,5 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md)  an
 - **Question** - a request for information which has a pre-defined set of acceptable answers.
 - **Applicant** - the person applying for a job.
 - **Employer** - the business entity which considers **JobApplications** 
-- **Validation** - a review of the submitted JSON data to determine if it meets the minimum qualifications. 
+- **Validation** - a review of **JobApplication** data to determine if the answers provided are all within the acceptable values for the **Questions** posed. 
 
