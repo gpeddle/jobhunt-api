@@ -2,27 +2,31 @@
 
 ## Overview
 
-This section reviews the [API Code Assignment](/docs/api-code-assignment.md)  and collects decisions and assumptions made for the project. [Original PDF here](/docs/API-Code-Assignment.pdf)
+This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and collects decisions and assumptions made for the project. [Original PDF here](/docs/API-Code-Assignment.pdf)
 
 ## Assumptions
 
 1. There is no UI, and the API is tested manually. 
-   - *For our purpose, the request/response of the API is the only UI.* 
+   - For our purpose, the request/response of the API is the only UI.
 2. There is no separate database.
-   - *A real system would persist data and do additional processing. This example is limited to  receiving and validating incoming records for accept/reject status.*
+   - A real system would persist data and do additional processing. 
+   - This example is limited to receiving and validating incoming records for accept/reject status.
 3. A series of test questions and answers must be created.
-   - *A real system would require a full life-cycle for Questions. This example is limited to a single, static question set for use in validation.*
+   - A real system would require a full life-cycle for Questions. 
+   - This example is limited to a single, static set of questions for use in validation.
 
+## Bounded Context
 
+- The API is focused upon receipt of **JobApplication** JSON data and immediate response with accept/reject status.
+- The **Questions** are from a separate authority, available as a service. 
 
 ## Ubiquitous Language
 
-- **JobApplication** - the submitted JSON data with answers to **Questions**
+- **JobApplication** - the submitted JSON data that contains answers to **Questions**
 - **Question** - a request for information which has a pre-defined set of acceptable answers.
-- **Applicant** - the person applying for a job.
+- **JobSeeker** - the person applying for a job.
 - **Employer** - the business entity which considers **JobApplications** 
-- **Validation** - a review of **JobApplication** data to determine if the answers provided are all within the acceptable values for the **Questions** posed. 
-
+- **Validation** - a review of **JobApplication** data to determine if all of the answers provided are acceptable values for the **Questions** posed. 
 
 ## Domain Description
 
@@ -34,14 +38,17 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md)  an
 7. A **JobApplication** which fails validation is *Rejected*, with a JSON response.
 8. Each *Rejected* **JobApplication** is discarded.
 
-## Bounded Context
-
-The API will handle only the receipt of **JobApplication** JSON data and immediately respond with accept/reject status.
-The **Questions** are a separate authority that is available as a service. 
-
 ## Technical Decisions
 
 - Implement an API only service using .NET 6.0 webapi template
 - Use Swagger to test the behavior of the API
-- During testing, store submitted data in memory
-- Stopping the API service loses all submitted data
+- Store persisted data in memory only. 
+- Stopping the API service loses all persisted data
+- Implement a local **Questions** service that loads from a static JSON file
+
+## Future
+
+- A future implementation could employ a different storage service.
+- **Questions** are managed by a different part of the overall system, but there are important concerns about them:
+  - Can the text of a question be edited, after the answer is provided? What would this mean?
+  - Should questions be expanded to allow True/False, Multiple-choice, or Short-answer?
