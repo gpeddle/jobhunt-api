@@ -46,9 +46,10 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and
 - Stopping the API service loses all persisted data
 - Implement a local **Questions** service that loads from a static JSON file
 
-## Future
+## Other Notes
 
 - A future implementation could employ a different storage service.
 - **Questions** are managed by a different part of the overall system, but there are important concerns about them:
   - Can the text of a question be edited, after the answer is provided? What would this mean?
   - Should questions be expanded to allow True/False, Multiple-choice, or Short-answer?
+- The **Question** entity has a mismatch between expected JSON and the more likely field name *Text* - Ie. the entity could have **Question.Text** and **Question.Answer** as more natural field names, avoiding the odd **Question.Question** that the JSON suggests. This example works around the problem by mapping the name during loading.
