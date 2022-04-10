@@ -1,3 +1,4 @@
+using JobHunt.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobHunt.Api;

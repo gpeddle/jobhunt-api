@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
 using Moq;
 using System.Collections.Generic;
+using JobHunt.Api.Services;
 
 namespace JobHunt.Api.Tests;
 

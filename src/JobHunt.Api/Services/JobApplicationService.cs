@@ -1,6 +1,8 @@
 using System;
 using JobHunt.Api.Models;
 
+namespace JobHunt.Api.Services;
+
 public interface IJobApplicationService {
     public Task<List<JobApplication>> GetAllJobApplications();
 
