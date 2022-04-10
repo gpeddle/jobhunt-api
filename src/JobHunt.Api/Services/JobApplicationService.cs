@@ -17,9 +17,9 @@ public interface IJobApplicationService {
 public class JobApplicationService : IJobApplicationService {
     
     private DatabaseContext _context;
-    private QuestionService _questionService;
+    private IQuestionService _questionService;
 
-    public JobApplicationService(DatabaseContext context, QuestionService questionService)
+    public JobApplicationService(DatabaseContext context, IQuestionService questionService)
     {
         _context = context;
         _questionService = questionService;
