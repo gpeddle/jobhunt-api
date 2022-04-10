@@ -9,7 +9,7 @@ using JobHunt.Api.Services;
 
 namespace JobHunt.Api.Tests;
 
-public class TestJobHuntApiController
+public class TestJobApplicationController
 {
     [Fact]
      public async Task Get_Returns_Status_200()
@@ -20,7 +20,7 @@ public class TestJobHuntApiController
             .Setup(service => service.GetAll())
             .ReturnsAsync(new List<JobApplication>());
         var questionService = new QuestionService();
-        var sut = new JobHuntApiController(
+        var sut = new JobApplicationController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -42,7 +42,7 @@ public class TestJobHuntApiController
             .Setup(service => service.GetAll())
             .ReturnsAsync(new List<JobApplication>());
         var questionService = new QuestionService();
-        var sut = new JobHuntApiController(
+        var sut = new JobApplicationController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -72,7 +72,7 @@ public class TestJobHuntApiController
             .Setup(service => service.GetAll())
             .Returns(Task.FromResult(mockList));
         var questionService = new QuestionService();
-        var sut = new JobHuntApiController(
+        var sut = new JobApplicationController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -97,7 +97,7 @@ public class TestJobHuntApiController
             .Setup(service => service.Submit())
             .Returns(Task.FromResult(true));
         var questionService = new QuestionService();
-        var sut = new JobHuntApiController(
+        var sut = new JobApplicationController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -121,7 +121,7 @@ public class TestJobHuntApiController
             .Returns(Task.FromResult(false));
 
         var questionService = new QuestionService();
-        var sut = new JobHuntApiController(
+        var sut = new JobApplicationController(
             mockJobApplicationService.Object,
             questionService
         );
