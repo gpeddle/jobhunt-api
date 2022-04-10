@@ -9,8 +9,10 @@ public class JobApplicationsController : ControllerBase
 {
  
     private readonly IJobApplicationService _jobApplicationService;
-    public JobApplicationsController(IJobApplicationService jobApplicationService){
+    private readonly IQuestionService _questionService;
+    public JobApplicationsController(IJobApplicationService jobApplicationService, IQuestionService questionService){
         _jobApplicationService = jobApplicationService;
+        _questionService = questionService;
     }
 
     [HttpGet(Name = "GetAllJobApplications")]

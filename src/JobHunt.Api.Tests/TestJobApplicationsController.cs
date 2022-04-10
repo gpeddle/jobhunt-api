@@ -1,6 +1,4 @@
 using Xunit;
-
-using JobHunt.Api;
 using JobHunt.Api.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
