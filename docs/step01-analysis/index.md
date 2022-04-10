@@ -55,3 +55,4 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and
   - Can the text of a question be edited, after the answer is provided? What would this mean?
   - Should questions be expanded to allow True/False, Multiple-choice, or Short-answer?
 - The **Question** entity has a mismatch between expected JSON and the more likely field name *Text* - Ie. the entity could have **Question.Text** and **Question.Answer** as more natural field names, avoiding the odd **Question.Question** that the JSON suggests. This example works around the problem by mapping the name during loading.
+- The JSON  entity has a naming mismatch which causes confusion - The field *Questions* is really a list of *Answers*, and there is a collision between the potential class name **Answer** and the JSON field *Answer*. This example respects the JSON specification and works around the problem by modeling **JobApplicationAnswer**, but there is obvious room for improvement here.
