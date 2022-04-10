@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobHunt.Api", "JobHunt.Api\JobHunt.Api.csproj", "{F4FCB1A2-A795-486E-8F62-D91E1731989B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobHunt.Api.Tests", "JobHunt.Api.Tests\JobHunt.Api.Tests.csproj", "{3D953545-CF6C-47BC-8C24-C61024C2CA96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4FCB1A2-A795-486E-8F62-D91E1731989B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4FCB1A2-A795-486E-8F62-D91E1731989B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4FCB1A2-A795-486E-8F62-D91E1731989B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4FCB1A2-A795-486E-8F62-D91E1731989B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D953545-CF6C-47BC-8C24-C61024C2CA96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D953545-CF6C-47BC-8C24-C61024C2CA96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D953545-CF6C-47BC-8C24-C61024C2CA96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D953545-CF6C-47BC-8C24-C61024C2CA96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
