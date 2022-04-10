@@ -14,3 +14,6 @@ echo '# Step 3 - Code' >  docs/step03-code/index.md
 echo '# Step 4 - Testing' >  docs/step04-testing/index.md
 echo '# Step 5 - Deployment' >  docs/step05-deployment/index.md
 ```
+
+
+[Additional Notes](notes.md)

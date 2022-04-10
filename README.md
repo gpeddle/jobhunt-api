@@ -1,4 +1,4 @@
-# jobapp-api
+# jobhunt-api
 
 Construct a simple API that validates employment questionnaire responses.
 
