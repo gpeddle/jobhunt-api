@@ -11,7 +11,7 @@ using JobHunt.Api.Services;
 
 namespace JobHunt.Api.Tests;
 
-public class Test_JobApplicationsController
+public class TestJobApplicationsController
 {
     [Fact]
      public async Task Get_Returns_Status_200()
@@ -21,7 +21,11 @@ public class Test_JobApplicationsController
         mockJobApplicationService
             .Setup(service => service.GetAllJobApplications())
             .ReturnsAsync(new List<JobApplication>());
-        var sut = new JobApplicationsController(mockJobApplicationService.Object);
+        var questionService = new QuestionService();
+        var sut = new JobApplicationsController(
+            mockJobApplicationService.Object,
+            questionService
+        );
 
         // Act
         var result = (OkObjectResult)  await sut.Get();
@@ -39,7 +43,11 @@ public class Test_JobApplicationsController
         mockJobApplicationService
             .Setup(service => service.GetAllJobApplications())
             .ReturnsAsync(new List<JobApplication>());
-        var sut = new JobApplicationsController(mockJobApplicationService.Object);
+        var questionService = new QuestionService();
+        var sut = new JobApplicationsController(
+            mockJobApplicationService.Object,
+            questionService
+        );
 
         // Act
         var result = (OkObjectResult)  await sut.Get();
@@ -65,7 +73,11 @@ public class Test_JobApplicationsController
         mockJobApplicationService
             .Setup(service => service.GetAllJobApplications())
             .Returns(Task.FromResult(mockList));
-        var sut = new JobApplicationsController(mockJobApplicationService.Object);
+        var questionService = new QuestionService();
+        var sut = new JobApplicationsController(
+            mockJobApplicationService.Object,
+            questionService
+        );
 
         // Act
         var result = (OkObjectResult)  await sut.Get();
@@ -86,7 +98,11 @@ public class Test_JobApplicationsController
         mockJobApplicationService
             .Setup(service => service.SubmitJobApplication())
             .Returns(Task.FromResult(true));
-        var sut = new JobApplicationsController(mockJobApplicationService.Object);
+        var questionService = new QuestionService();
+        var sut = new JobApplicationsController(
+            mockJobApplicationService.Object,
+            questionService
+        );
 
         // Act
         var validData = new JobApplication { Name = "Job Seeker 1"};
@@ -105,8 +121,12 @@ public class Test_JobApplicationsController
         mockJobApplicationService
             .Setup(service => service.SubmitJobApplication())
             .Returns(Task.FromResult(false));
-        var sut = new JobApplicationsController(mockJobApplicationService.Object);
 
+        var questionService = new QuestionService();
+        var sut = new JobApplicationsController(
+            mockJobApplicationService.Object,
+            questionService
+        );
         // Act
         var badData = new JobApplication { Name = "Job Seeker 1"};
         var result = (BadRequestObjectResult) await sut.Post();
@@ -115,5 +135,5 @@ public class Test_JobApplicationsController
         result.StatusCode.Should().Be(400);
 
     }
-
+    
 }
