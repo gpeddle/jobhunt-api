@@ -28,7 +28,9 @@ Confirm that no errors are displayed.
 
 ## Run the generated project
 
-1. Start the service by `dotnet run --urls=http://localhost:7777`
+1. Start the service by:
+   - `cd src/JobHunt.Api`
+   - `dotnet run --urls=http://localhost:7777`
 2. View the API using swagger by opening a browser to http://localhost:7777/swagger/index.html
 
 
