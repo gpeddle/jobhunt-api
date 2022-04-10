@@ -36,6 +36,10 @@ Confirm that no errors are displayed.
 
 ## Add Testing Support
 
+We use a TDD approach, enabled by Xunit and the following:
+- **Moq** provides simple and powerful way to mock dependencies during testing.
+- **FluentAssertions** provides expressive test assertions and messages.
+
 ```
 dotnet add JobHunt.Api.Tests/JobHunt.Api.Tests.csproj package Microsoft.AspNetCode.Mvc
 dotnet add JobHunt.Api.Tests/JobHunt.Api.Tests.csproj package FluentAssertions

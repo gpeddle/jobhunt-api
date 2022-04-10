@@ -42,9 +42,11 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and
 
 - Implement an API only service using .NET 6.0 webapi template
 - Use Swagger to test the behavior of the API
+- Use TDD approach based on Xunit, Moq and FluentAssertions
 - Store persisted data in memory only. 
 - Stopping the API service loses all persisted data
 - Implement a local **Questions** service that loads from a static JSON file
+
 
 ## Other Notes
 
