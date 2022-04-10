@@ -62,4 +62,14 @@ The **JobApplicationService** is responsible for checking the validity of the su
 1. In `TestJobApplicationService.cs`, create a shared *GetDatabaseContext()* method to eliminate boilerplate in test cases.
 2. Implement  **JobApplicationService** pass-thru methods and tests for data retrieval.
 
+
+## Add JobApplicationAnswer and validation Code
+
+Up until now, the have been no answers. Add a new Class **JobApplicationAnswer** and incorporate it into the **JobApplication** class.(*See revised analysis for notes*)
+
+The validation code is simple. The **JobApplicationService** receives a new records, and verifies the provided answers against the list of acceptable answers from the *QuestionService**.
+
+Incoming records have a blank Id, and any value in this field is ignored. There is no ability to update existing records, and a duplicate submission will be considered as an entirely new potential record.
+
  
+

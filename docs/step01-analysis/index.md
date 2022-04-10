@@ -14,6 +14,7 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and
 3. A series of test questions and answers must be created.
    - A real system would require a full life-cycle for Questions. 
    - This example is limited to a single, static set of questions for use in validation.
+4. Incoming records have no Id specified, and *Name* is not a realistic key, so this example does not update any existing record. If present, the *Id* value is ignored.
 
 ## Bounded Context
 
@@ -46,7 +47,6 @@ This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and
 - Store persisted data in memory only. 
 - Stopping the API service loses all persisted data
 - Implement a local **Questions** service that loads from a static JSON file
-
 
 ## Other Notes
 
