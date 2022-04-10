@@ -1,12 +1,8 @@
 using System;
 using Xunit;
-
-using JobHunt.Api;
 using JobHunt.Api.Models;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
-using Moq;
 using System.Collections.Generic;
 using JobHunt.Api.Data;
 using JobHunt.Api.Services;
@@ -44,7 +40,8 @@ public class TestJobApplicationService
         var jobApplication = await jobApplicationService.GetById("id1");
         
         // Assert
-        jobApplication.Should().BeOfType<JobApplication?>();
+        jobApplication.Should().BeOfType<JobApplication>();
+        jobApplication.Id.Should().Be("id1");
     }
     
     [Fact]
@@ -69,7 +66,7 @@ public class TestJobApplicationService
             .Options;
         var dbContext = new DatabaseContext(options);
         await dbContext.Database.EnsureCreatedAsync();
-        if (await dbContext.JobApplications.CountAsync() > 0)
+        if (await dbContext.JobApplications.AnyAsync() )
         {
             return dbContext;
         }
@@ -79,8 +76,8 @@ public class TestJobApplicationService
         {
             dbContext.JobApplications.Add(new JobApplication()
             {
-                Id = $"id${i}",
-                Name = $"Name id${i}"
+                Id = $"id{i}",
+                Name = $"Name id{i}"
             });
             await dbContext.SaveChangesAsync();
         }

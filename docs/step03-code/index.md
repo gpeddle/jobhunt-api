@@ -60,3 +60,6 @@ The **JobApplicationService** is responsible for checking the validity of the su
     - **JobApplication**
 
 1. In `TestJobApplicationService.cs`, create a shared *GetDatabaseContext()* method to eliminate boilerplate in test cases.
+2. Implement  **JobApplicationService** pass-thru methods and tests for data retrieval.
+
+ 
