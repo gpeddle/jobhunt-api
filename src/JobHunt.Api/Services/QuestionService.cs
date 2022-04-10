@@ -5,8 +5,8 @@ namespace JobHunt.Api.Services;
 
 public interface IQuestionService
 {
-    public Task<List<Question>> GetAllQuestions();
-    public Task<Question?> GetQuestionById(string id);
+    public Task<List<Question>> GetAll();
+    public Task<Question?> GetById(string id);
 }
 
 public class QuestionService : IQuestionService {
@@ -50,12 +50,12 @@ public class QuestionService : IQuestionService {
             Answer = "Yes"
         },
     };
-    public Task<List<Question>> GetAllQuestions()
+    public Task<List<Question>> GetAll()
     {
         return Task.FromResult(_questions);
     }
 
-    public Task<Question?> GetQuestionById(string id)
+    public Task<Question?> GetById(string id)
     {
         var question = _questions.FirstOrDefault(q => q.Id == id);
         return Task.FromResult<Question?>(question);

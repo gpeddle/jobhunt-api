@@ -21,8 +21,16 @@ https://docs.docker.com/engine/security/rootless/
 Linux .NET 6 build, first set `omnisharp.useModernNet` to `true` (requires vscode restart)
 https://github.com/OmniSharp/omnisharp-vscode
 
-
 .NET Nullable reference types to improve null diagnostic warnings
 https://docs.microsoft.com/en-us/dotnet/csharp/nullable-migration-strategies
 
+EF Core in an ASP.NET MVC web app
+https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0
 
+https://docs.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli
+
+How to Mock Entity Framework DbContext for Unit Testing
+https://dotnetthoughts.net/how-to-mock-dbcontext-for-unit-testing/
+
+Nullable Reference Type Support in Entity Framework Core (DBSet - null!)
+https://www.dotnetcurry.com/csharp/nullable-reference-types-csharp

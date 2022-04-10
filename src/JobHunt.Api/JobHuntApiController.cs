@@ -5,12 +5,13 @@ namespace JobHunt.Api;
 
 [ApiController]
 [Route("[controller]")]
-public class JobApplicationsController : ControllerBase
+public class JobHuntApiController : ControllerBase
 {
  
     private readonly IJobApplicationService _jobApplicationService;
     private readonly IQuestionService _questionService;
-    public JobApplicationsController(IJobApplicationService jobApplicationService, IQuestionService questionService){
+    public JobHuntApiController( IJobApplicationService jobApplicationService, 
+                              IQuestionService questionService){
         _jobApplicationService = jobApplicationService;
         _questionService = questionService;
     }
@@ -18,20 +19,19 @@ public class JobApplicationsController : ControllerBase
     [HttpGet(Name = "GetAllJobApplications")]
     public async Task<IActionResult> Get()
     {
-        var jobApplications = await _jobApplicationService.GetAllJobApplications();
+        var jobApplications = await _jobApplicationService.GetAll();
         return Ok(jobApplications);
     }
 
     [HttpPost(Name = "SubmitJobApplication")]
     public async Task<IActionResult> Post()
     {
-        var status = await _jobApplicationService.SubmitJobApplication();
-
+        var status = await _jobApplicationService.Submit();
         if (status == false)
         {
-            return new BadRequestObjectResult(false);
+            return new BadRequestObjectResult("All answers must be valid");
         }
-        return Ok(true); 
+        return Ok("Success"); 
     }
 
 }

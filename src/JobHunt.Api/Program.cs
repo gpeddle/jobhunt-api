@@ -1,4 +1,7 @@
+using JobHunt.Api.Data;
 using JobHunt.Api.Services;
+
+using Microsoft.EntityFrameworkCore ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,4 +33,5 @@ app.Run();
 void ConfigureServices(IServiceCollection services){
     services.AddTransient<IQuestionService, QuestionService>();
     services.AddTransient<IJobApplicationService, JobApplicationService>();
+    services.AddDbContext<DatabaseContext>(options => options.UseInMemoryDatabase(databaseName: "JobHuntData"));
 }

@@ -15,26 +15,26 @@ public class TestQuestionService
 {
 
     [Fact]
-    public async Task GetAllQuestions_Returns_ListOfQuestions()
+    public async Task GetAll_Returns_ListOfQuestions()
     {
         // Arrange
         var questionService = new QuestionService();
         
         // Act
-        var allQuestions = await questionService.GetAllQuestions();
+        var allQuestions = await questionService.GetAll();
         
         // Assert
         allQuestions.Should().BeOfType<List<Question>>();
     }
     
     [Fact]
-    public async Task GetQuestionById_ValidId_Returns_Question()
+    public async Task GetById_ValidId_Returns_Question()
     {
         // Arrange
         var questionService = new QuestionService();
         
         // Act
-        var question = await questionService.GetQuestionById("id1");
+        var question = await questionService.GetById("id1");
         
         // Assert
         question.Should().BeOfType<Question?>();
@@ -47,7 +47,7 @@ public class TestQuestionService
         var questionService = new QuestionService();
         
         // Act
-        var question = await questionService.GetQuestionById("SUPERBAD");
+        var question = await questionService.GetById("SUPERBAD");
         
         // Assert
         question.Should().Be(null);

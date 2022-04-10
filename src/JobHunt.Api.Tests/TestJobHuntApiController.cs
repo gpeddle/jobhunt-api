@@ -9,7 +9,7 @@ using JobHunt.Api.Services;
 
 namespace JobHunt.Api.Tests;
 
-public class TestJobApplicationsController
+public class TestJobHuntApiController
 {
     [Fact]
      public async Task Get_Returns_Status_200()
@@ -17,10 +17,10 @@ public class TestJobApplicationsController
         // Arrange
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
-            .Setup(service => service.GetAllJobApplications())
+            .Setup(service => service.GetAll())
             .ReturnsAsync(new List<JobApplication>());
         var questionService = new QuestionService();
-        var sut = new JobApplicationsController(
+        var sut = new JobHuntApiController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -39,10 +39,10 @@ public class TestJobApplicationsController
         // Arrange
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
-            .Setup(service => service.GetAllJobApplications())
+            .Setup(service => service.GetAll())
             .ReturnsAsync(new List<JobApplication>());
         var questionService = new QuestionService();
-        var sut = new JobApplicationsController(
+        var sut = new JobHuntApiController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -52,7 +52,7 @@ public class TestJobApplicationsController
         
         // Assert
         mockJobApplicationService.Verify(
-            service => service.GetAllJobApplications(),
+            service => service.GetAll(),
             Times.Once()
         );
 
@@ -69,10 +69,10 @@ public class TestJobApplicationsController
 
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
-            .Setup(service => service.GetAllJobApplications())
+            .Setup(service => service.GetAll())
             .Returns(Task.FromResult(mockList));
         var questionService = new QuestionService();
-        var sut = new JobApplicationsController(
+        var sut = new JobHuntApiController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -94,10 +94,10 @@ public class TestJobApplicationsController
         // Arrange
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
-            .Setup(service => service.SubmitJobApplication())
+            .Setup(service => service.Submit())
             .Returns(Task.FromResult(true));
         var questionService = new QuestionService();
-        var sut = new JobApplicationsController(
+        var sut = new JobHuntApiController(
             mockJobApplicationService.Object,
             questionService
         );
@@ -117,11 +117,11 @@ public class TestJobApplicationsController
         // Arrange
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
-            .Setup(service => service.SubmitJobApplication())
+            .Setup(service => service.Submit())
             .Returns(Task.FromResult(false));
 
         var questionService = new QuestionService();
-        var sut = new JobApplicationsController(
+        var sut = new JobHuntApiController(
             mockJobApplicationService.Object,
             questionService
         );
