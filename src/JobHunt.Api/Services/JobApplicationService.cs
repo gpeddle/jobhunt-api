@@ -10,7 +10,7 @@ public interface IJobApplicationService {
     
     public Task<JobApplication> GetById(string id);
 
-    public Task<bool> Submit();
+    public Task<bool> Submit(JobApplication jobApplication);
 
 }
 
@@ -35,7 +35,9 @@ public class JobApplicationService : IJobApplicationService {
         return Task.FromResult( jobApplication)!;
     }  
     
-    public Task<bool> Submit(){
-        throw new NotImplementedException();
+    public Task<bool> Submit(JobApplication jobApplication){
+        //throw new NotImplementedException();
+
+        return Task.FromResult(true);
     }  
 }

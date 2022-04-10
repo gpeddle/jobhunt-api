@@ -1,3 +1,4 @@
+using JobHunt.Api.Models;
 using JobHunt.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,16 +18,16 @@ public class JobApplicationController : ControllerBase
     }
     
     [HttpGet(Name = "GetAllJobApplications")]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAllJobApplications()
     {
         var jobApplications = await _jobApplicationService.GetAll();
         return Ok(jobApplications);
     }
     
     [HttpPost(Name = "SubmitJobApplication")]
-    public async Task<IActionResult> Post()
+    public async Task<IActionResult> SubmitJobApplication(JobApplication jobApplication)
     {
-        var status = await _jobApplicationService.Submit();
+        var status = await _jobApplicationService.Submit(jobApplication);
         if (status == false)
         {
             return new BadRequestObjectResult("All answers must be valid");
