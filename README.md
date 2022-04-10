@@ -1,4 +1,4 @@
-# snagajob-api
+# jobapp-api
 
 Construct a simple API that validates employment questionnaire responses.
 
