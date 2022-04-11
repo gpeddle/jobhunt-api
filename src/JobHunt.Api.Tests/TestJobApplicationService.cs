@@ -59,12 +59,63 @@ public class TestJobApplicationService
         jobApplication.Should().Be(null);
     }
     
-    private async Task<DatabaseContext> GetDatabaseContext()
+    [Fact]
+    public async Task Submit_ValidData_Returns_New_Id()
     {
-        var options = new DbContextOptionsBuilder<DatabaseContext>()
+
+        // Arrange
+        var dbContext = await GetDatabaseContext();
+        var questionService = new QuestionService();
+        var sut = new JobApplicationService(dbContext, questionService);
+        
+        // Act
+        var validData = new JobApplication
+        {
+            Name = "Valid Data",
+            Answers = new List<JobApplicationAnswer>()
+            {
+                new JobApplicationAnswer(){ QuestionId = "id1", Answer = "No"}, // Felony conviction?
+                new JobApplicationAnswer(){ QuestionId = "id2", Answer = "Yes"},// Authorized to work?
+            }
+        };
+        var result = await sut.Submit(validData);
+        
+        // Assert
+        result.Should().NotBe(null);
+    }
+    
+    [Fact]
+    public async Task Submit_BadData_Returns_Null()
+    {
+
+        // Arrange
+        var dbContext = await GetDatabaseContext();
+        var questionService = new QuestionService();
+        var sut = new JobApplicationService(dbContext, questionService);
+        
+        // Act
+        var validData = new JobApplication
+        {
+            Name = "Bad Data",
+            Answers = new List<JobApplicationAnswer>()
+            {
+                new JobApplicationAnswer(){ QuestionId = "id1", Answer = "Yes"}, // Felony conviction?
+                new JobApplicationAnswer(){ QuestionId = "id2", Answer = "No"},// Authorized to work?
+            }
+        };
+        string? result = await sut.Submit(validData);
+        
+        // Assert
+        result.Should().Be(null);
+        
+    }
+    
+    private async Task<AppDataContext> GetDatabaseContext()
+    {
+        var options = new DbContextOptionsBuilder<AppDataContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
-        var dbContext = new DatabaseContext(options);
+        var dbContext = new AppDataContext(options);
         await dbContext.Database.EnsureCreatedAsync();
         if (await dbContext.JobApplications.AnyAsync() )
         {
@@ -77,7 +128,11 @@ public class TestJobApplicationService
             dbContext.JobApplications.Add(new JobApplication()
             {
                 Id = $"id{i}",
-                Name = $"Name id{i}"
+                Name = $"Name id{i}",
+                Answers = new List<JobApplicationAnswer>()
+                {
+                    new JobApplicationAnswer(){ QuestionId = "id1", Answer = "No"}, // Felony conviction?
+                }
             });
             await dbContext.SaveChangesAsync();
         }

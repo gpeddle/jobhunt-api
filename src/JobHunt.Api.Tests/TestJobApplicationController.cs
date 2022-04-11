@@ -70,7 +70,7 @@ public class TestJobApplicationController
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
             .Setup(service => service.GetAll())
-            .Returns(Task.FromResult(mockList));
+            .ReturnsAsync(mockList);
         var questionService = new QuestionService();
         var sut = new JobApplicationController(
             mockJobApplicationService.Object,
@@ -90,12 +90,23 @@ public class TestJobApplicationController
     [Fact]
     public async Task Post_OnAccepted_Returns_Status_200()
     {
+        
+        var validData = new JobApplication
+        {
+            Name = "Valid Job Seeker",
+            Answers = new List<JobApplicationAnswer>()
+            {
+                new JobApplicationAnswer(){ QuestionId = "id1", Answer = "No"}, // Felony conviction?
+                new JobApplicationAnswer(){ QuestionId = "id2", Answer = "Yes"},// Authorized to work?
+            }
+        };
 
         // Arrange
+        var expected = "newid";
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
-            .Setup(service => service.Submit(new JobApplication()))
-            .Returns(Task.FromResult(true));
+            .Setup(service => service.Submit(validData))
+            .ReturnsAsync( expected);
         var questionService = new QuestionService();
         var sut = new JobApplicationController(
             mockJobApplicationService.Object,
@@ -103,16 +114,8 @@ public class TestJobApplicationController
         );
 
         // Act
-        var validData = new JobApplication
-        {
-            Name = "Valid Job Seeker",
-            Answers = new List<JobApplicationAnswer>()
-            {
-                new JobApplicationAnswer(){ Id = "id1", Answer = "No"}, // Felony conviction?
-                new JobApplicationAnswer(){ Id = "id2", Answer = "Yes"},// Authorized to work?
-            }
-        };
-        var result = (OkObjectResult)await sut.SubmitJobApplication(validData);
+        
+        var result = (OkObjectResult) await sut.SubmitJobApplication(validData);
 
         // Assert
         result.StatusCode.Should().Be(200);
@@ -122,27 +125,30 @@ public class TestJobApplicationController
     public async Task Post_OnRejected_Returns_Status_400()
     {
 
+        var badData = new JobApplication
+        {
+            Name = "Bad Data",
+            Answers = new List<JobApplicationAnswer>()
+            {
+                new JobApplicationAnswer(){ QuestionId = "id1", Answer = "Yes"}, // Felony conviction?
+                new JobApplicationAnswer(){ QuestionId = "id2", Answer = "No"},// Authorized to work?
+            }
+        };
+        
         // Arrange
+        string? expected = null;
         var mockJobApplicationService = new Mock<IJobApplicationService>();
         mockJobApplicationService
-            .Setup(service => service.Submit(new JobApplication()))
-            .Returns(Task.FromResult(false));
+            .Setup(service => service.Submit(badData))
+            .ReturnsAsync(expected);
 
         var questionService = new QuestionService();
         var sut = new JobApplicationController(
             mockJobApplicationService.Object,
             questionService
         );
+        
         // Act
-        var badData = new JobApplication
-        {
-            Name = "Bad Data",
-            Answers = new List<JobApplicationAnswer>()
-            {
-                new JobApplicationAnswer(){ Id = "id1", Answer = "Yes"}, // Felony conviction?
-                new JobApplicationAnswer(){ Id = "id2", Answer = "No"},// Authorized to work?
-            }
-        };
         var result = (BadRequestObjectResult) await sut.SubmitJobApplication(badData);
       
         // Assert
