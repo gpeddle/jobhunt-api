@@ -25,14 +25,14 @@ public class JobApplicationController : ControllerBase
     }
     
     [HttpPost(Name = "SubmitJobApplication")]
-    public async Task<IActionResult> SubmitJobApplication(JobApplication jobApplication)
+    public async Task<IActionResult> SubmitJobApplication([Bind("Name,Answers")] JobApplication jobApplication)
     {
-        var status = await _jobApplicationService.Submit(jobApplication);
-        if (status == false)
+        var newId = await _jobApplicationService.Submit(jobApplication);
+        if (String.IsNullOrEmpty(newId))
         {
-            return new BadRequestObjectResult("All answers must be valid");
+            return BadRequest("All answers must be valid");
         }
-        return Ok("Success"); 
+        return Ok(newId); 
     }
 
 }
