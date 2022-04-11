@@ -2,13 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobHunt.Api.Data
 {
-    public class DatabaseContext : DbContext
+    public class AppDataContext : DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+        public AppDataContext(DbContextOptions<AppDataContext> options)
             : base(options)
         {
         }
 
         public DbSet<Models.JobApplication> JobApplications { get; set; } = null!;
+        
     }
 }
