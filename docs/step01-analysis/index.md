@@ -2,7 +2,7 @@
 
 ## Overview
 
-This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and collects decisions and assumptions made for the project. [Original PDF here](/docs/API-Code-Assignment.pdf)
+This section reviews the [API Code Assignment](/docs/api-code-assignment.md) and collects decisions and assumptions made for the project. 
 
 ## Assumptions
 
