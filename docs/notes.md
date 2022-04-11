@@ -34,3 +34,6 @@ https://dotnetthoughts.net/how-to-mock-dbcontext-for-unit-testing/
 
 Nullable Reference Type Support in Entity Framework Core (DBSet - null!)
 https://www.dotnetcurry.com/csharp/nullable-reference-types-csharp
+
+Model Binding in ASP.NET Core
+https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-6.0

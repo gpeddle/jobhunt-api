@@ -71,8 +71,4 @@ The validation code is simple. The **JobApplicationService** receives a new reco
 
 Incoming records have a blank Id, and any value in this field is ignored. There is no ability to update existing records, and a duplicate submission will be considered as an entirely new potential record.
 
- ## Add Seed data 
- 
- For demonstration purposes, we add a few records to the in-memory database that represent previously submitted job applications with valid answers.
-
 
