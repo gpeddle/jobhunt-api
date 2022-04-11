@@ -26,9 +26,8 @@ This project contain tests for the API, using a TDD approach.
 
 As we work through coding below, we need to: 
 
-    - Create *Happy Path* tests for controller and service methods
-    - Create *Failure* tests for controller and service methods
-    
+- Create *Happy Path* tests for controller and service methods
+- Create *Failure* tests for controller and service methods    
 
 ## Run Tests and see failures for initial structure
 
@@ -40,18 +39,18 @@ We choose to implement QuestionService as a combination service and repository u
 
 The QuestionService requires little testing because it is trivial. Basic tests to confirm the presence or absence of data are enough.
 
-## Implement DatabaseContext and tests
+## Implement AppDataContext
 
-This is implemented using an EntityFramework in-memory store.
+The **AppDataContext** class is responsible for data access and is implemented using an EntityFramework in-memory store.
 
 1. Add EF libraries: 
    - `cd src/JobHunt.Api`
    - `dotnet add JobHunt.Api.csproj package  Microsoft.EntityFrameworkCore`
    - `dotnet add JobHunt.Api.csproj package  Microsoft.EntityFrameworkCore.InMemory`
 
-2. Add `Data/DatabaseContext.cs` with a DbContext subclass that exposes a DbSet of **JobApplications**.
+2. Add `Data/AppDataContext.cs`, subclassing DbContext and expose a DbSet of **JobApplications**.
 
-3. In `Program.cs`, add code to *ConfigureServices()* thto initialze the in-memory store. 
+3. In `Program.cs`, add code to *ConfigureServices()* that initialze the in-memory store. 
 
 ## Implement JobApplicationService and Tests
 
@@ -67,7 +66,7 @@ The **JobApplicationService** is responsible for checking the validity of the su
 
 Up until now, the have been no answers. Add a new Class **JobApplicationAnswer** and incorporate it into the **JobApplication** class.(*See revised analysis for notes*)
 
-The validation code is simple. The **JobApplicationService** receives a new records, and verifies the provided answers against the list of acceptable answers from the *QuestionService**.
+The validation code is simple. The **JobApplicationService** receives a new records, and verifies the provided answers against the list of acceptable answers from the **QuestionService**.
 
 Incoming records have a blank Id, and any value in this field is ignored. There is no ability to update existing records, and a duplicate submission will be considered as an entirely new potential record.
 
