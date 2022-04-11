@@ -10,34 +10,64 @@ public interface IJobApplicationService {
     
     public Task<JobApplication> GetById(string id);
 
-    public Task<bool> Submit(JobApplication jobApplication);
+    public Task<string?> Submit(JobApplication jobApplication);
 
 }
 
 public class JobApplicationService : IJobApplicationService {
     
-    private DatabaseContext _context;
+    private AppDataContext _context;
     private IQuestionService _questionService;
 
-    public JobApplicationService(DatabaseContext context, IQuestionService questionService)
+    public JobApplicationService(AppDataContext context, IQuestionService questionService)
     {
         _context = context;
         _questionService = questionService;
     }
     public Task<List<JobApplication>> GetAll()
     {
-        return Task.FromResult(_context.JobApplications.ToList<JobApplication>());
+        var allApplications = _context.JobApplications
+                            .Include( a=> a.Answers)
+                            .ToList<JobApplication>();
+        return Task.FromResult(allApplications);
     }  
     
     public Task<JobApplication> GetById(string id)
     {
-        var jobApplication = _context.JobApplications.SingleOrDefault(o => o.Id == id);
+        var jobApplication = _context.JobApplications
+                            .Include( a=> a.Answers)
+                            .SingleOrDefault(o => o.Id == id);
         return Task.FromResult( jobApplication)!;
-    }  
-    
-    public Task<bool> Submit(JobApplication jobApplication){
-        //throw new NotImplementedException();
+    }
 
-        return Task.FromResult(true);
+    public async Task<string?> Submit(JobApplication jobApplication)
+    {
+        var isValid = true;
+       
+        if (jobApplication.Answers != null)
+        {
+            foreach (var a in jobApplication.Answers
+                         .Where(a => a.QuestionId != null))
+            {
+                if (a.QuestionId == null) continue;
+                var question = await _questionService.GetById(a.QuestionId);
+                if (question?.Answer != a.Answer)
+                {
+                    isValid = false;
+                }
+            }
+        }
+
+        string? nextId = null;
+        if (isValid)
+        {
+            //nextId = _context.GetNextId();
+            _context.JobApplications.Add(jobApplication);
+            await _context.SaveChangesAsync();
+            
+            nextId = jobApplication.Id;
+        }
+
+        return nextId;
     }  
 }
